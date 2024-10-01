@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { reactive, defineProps, watch, defineEmits, ref, computed } from 'vue';
+import { reactive, watch, defineEmits, ref, computed } from 'vue';
 import MarginInputGroup from './components/MarginInputGroup.vue';
+import type { DropDownOption } from './Interface/DropDown'
 
 interface SpacingValues {
     top: string;
@@ -11,14 +12,14 @@ interface SpacingValues {
 interface Props {
     initialMargin: SpacingValues;
     initialPadding: SpacingValues;
-    suggestions: string[];
+    suggestions: DropDownOption[];
     showSuggestions: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
     initialMargin: () => ({ top: '0', right: '0', bottom: '0', left: '0' }),
     initialPadding: () => ({ top: '20px', right: '20px', bottom: '20px', left: '20px' }),
-    suggestions: () => ['0', '4', '8', '12', '16', '20', '24', '32', '40', '48', '56', '64'],
+    suggestions: () => [{key:"applyToAll", displayName:"Apply to all"}],
     showSuggestions: true,
 });
 
@@ -49,7 +50,9 @@ const rectangleStyle = computed(() => ({
 
 const positions = ['top', 'right', 'bottom', 'left'];
 
-
+function updateJson(val:any){
+    console.log(val,'nikj');
+}
 
 // Methods to set suggested values
 const setMarginSuggestion = (event: Event, position: keyof SpacingValues) => {
@@ -69,7 +72,7 @@ const setPaddingSuggestion = (event: Event, position: keyof SpacingValues) => {
 
         <div class="">
             <div>
-                <MarginInputGroup :initial-margin="'20px'" :show-suggestions="props.showSuggestions" :drop-down-options="props.suggestions"></MarginInputGroup>
+                <MarginInputGroup :initial-margin="'20px'" :show-suggestions="props.showSuggestions" :drop-down-options="props.suggestions" @update-values="updateJson"></MarginInputGroup>
             </div>
             <div class="flex">
                 <div>
