@@ -1,1 +1,1 @@
- export type DropDownOption = { key: string, displayName: string }
+export type DropDownOption = { key: string, displayName: string,forAll?:boolean }
