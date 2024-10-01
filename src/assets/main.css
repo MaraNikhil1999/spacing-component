@@ -1,8 +1,8 @@
-.flex{
+.flex {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.flex-veritcal{
+.flex-veritcal {
     flex-direction: column;
 }
