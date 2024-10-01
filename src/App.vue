@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive, watch, defineEmits, ref, computed } from 'vue';
-import MarginInputGroup from './components/MarginInputGroup.vue';
+import { reactive, watch, ref, computed } from 'vue';
+import SpacingComponent from './components/SpacingComponent.vue';
 import type { DropDownOption } from './Interface/DropDown'
+import { useStyleObjStore } from './stores/styleObjStore';
 
 interface SpacingValues {
     top: string;
@@ -17,53 +18,16 @@ interface Props {
 };
 
 const props = withDefaults(defineProps<Props>(), {
-    initialMargin: () => ({ top: '0', right: '0', bottom: '0', left: '0' }),
+    initialMargin: () => ({ top: 'auto', right: 'auto', bottom: 'auto', left: 'auto' }),
     initialPadding: () => ({ top: '20px', right: '20px', bottom: '20px', left: '20px' }),
-    suggestions: () => [{key:"applyToAll", displayName:"Apply to all"}],
+    suggestions: () => [{ key: "applyToAll", displayName: "Apply to all" }],
     showSuggestions: true,
 });
 
 const emit = defineEmits(['update-values']);
-
-const marginLeft = ref("0px");
-const marginRight = ref("0px");
-const marginTop = ref("0px");
-const marginBottom = ref("0px");
-const paddingLeft = ref("0px");
-const paddingRight = ref("0px");
-const paddingTop = ref("0px");
-const paddingBottom = ref("0px");
-const rectangleStyle = computed(() => ({
-    marginLeft: marginLeft.value,
-    marginRight: marginRight.value,
-    marginTop: marginTop.value,
-    marginBottom: marginBottom.value,
-    paddingLeft: paddingLeft.value,
-    paddingRight: paddingRight.value,
-    paddingTop: paddingTop.value,
-    paddingBottom: paddingBottom.value,
-    width: '100px',
-    height: '100px',
-    backgroundColor: 'blue',
-}));
+const { styleObj } = useStyleObjStore();
 
 
-const positions = ['top', 'right', 'bottom', 'left'];
-
-function updateJson(val:any){
-    console.log(val,'nikj');
-}
-
-// Methods to set suggested values
-const setMarginSuggestion = (event: Event, position: keyof SpacingValues) => {
-    const value = (event.target as HTMLSelectElement).value;
-    // margin[position] = value;
-};
-
-const setPaddingSuggestion = (event: Event, position: keyof SpacingValues) => {
-    const value = (event.target as HTMLSelectElement).value;
-    // padding[position] = value;
-};
 </script>
 
 <template>
@@ -71,46 +35,32 @@ const setPaddingSuggestion = (event: Event, position: keyof SpacingValues) => {
         <h2>Margin Adjuster</h2>
 
         <div class="">
-            <div>
-                <MarginInputGroup :initial-margin="'20px'" :show-suggestions="props.showSuggestions" :drop-down-options="props.suggestions" @update-values="updateJson"></MarginInputGroup>
-            </div>
-            <div class="flex">
-                <div>
-                    <label for="marginLeft">Margin Left: </label>
-                    <input v-model="marginLeft" type="text" id="marginLeft" placeholder="e.g., 10px" />
-                </div>
-                <div class="padding">
-                    <div>
-                        <label for="paddingTop">padding Top: </label>
-                        <input v-model="paddingTop" type="text" id="paddingTop" placeholder="e.g., 10px" />
-                    </div>
-                    <div class="flex">
-                        <div>
-                            <label for="paddingLeft">padding Left: </label>
-                            <input v-model="paddingLeft" type="text" id="paddingLeft" placeholder="e.g., 10px" />
-                        </div>
-                        <div class="rectangle" :style="rectangleStyle"></div>
-                        <div>
 
-                            <label for="paddingRight">padding Right: </label>
-                            <input v-model="paddingRight" type="text" id="paddingRight" placeholder="e.g., 10px" />
-                        </div>
-                    </div>
-                    <div>
-                        <label for="paddingBottom">padding Bottom: </label>
-                        <input v-model="paddingBottom" type="text" id="paddingBottom" placeholder="e.g., 10px" />
-                    </div>
+            <SpacingComponent :initial-margin="initialMargin.top" :show-suggestions="props.showSuggestions"
+                :drop-down-options="props.suggestions" spacing-position="top" spacing-type="margin">
+            </SpacingComponent>
+            <div class="flex">
+                <SpacingComponent :initial-margin="initialMargin.left" :show-suggestions="props.showSuggestions"
+                    :drop-down-options="props.suggestions" spacing-position="left" spacing-type="margin">
+                </SpacingComponent>
+
+                <div class="padding">
+                    
                 </div>
-                <div>
-                    <label for="marginRight">Margin Right: </label>
-                    <input v-model="marginRight" type="text" id="marginRight" placeholder="e.g., 10px" />
-                </div>
+                <SpacingComponent :initial-margin="initialMargin.right" :show-suggestions="props.showSuggestions"
+                    :drop-down-options="props.suggestions" spacing-position="right" spacing-type="margin">
+                </SpacingComponent>
+
             </div>
-            <div>
-                <label for="marginBottom">Margin Bottom: </label>
-                <input v-model="marginBottom" type="text" id="marginBottom" placeholder="e.g., 10px" />
-            </div>
+            <SpacingComponent :initial-margin="initialMargin.bottom" :show-suggestions="props.showSuggestions"
+                :drop-down-options="props.suggestions" spacing-position="bottom" spacing-type="margin">
+            </SpacingComponent>
+
         </div>
+
+        <pre>
+            {{ styleObj }}
+        </pre>
     </div>
 </template>
 
