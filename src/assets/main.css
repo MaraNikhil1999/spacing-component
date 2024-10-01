@@ -25,10 +25,10 @@
     --bdr-grey: grey;
     --bg-blue: #ccd9e7;
     --bdr-blue: blue;
-    --margin-unit:4px;
-    --pading-unit:4px;
-    --width-unit:5px;
-    --height-unit:5px
+    --margin-unit: 4px;
+    --pading-unit: 4px;
+    --width-unit: 5px;
+    --height-unit: 5px;
 }
 @media (max-width: 768px) {
     :root {

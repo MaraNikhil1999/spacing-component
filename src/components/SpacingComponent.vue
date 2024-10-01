@@ -55,18 +55,25 @@ watch(
 
 <template>
     <div class="flex m-4">
-        <input type="text" v-model="initialSpacing" :disabled="isInputDisabled" :id="spacingPosition"
-            @change="setValueInStore" placeholder="0px" class="input-box" />
+        <input
+            type="text"
+            v-model="initialSpacing"
+            :disabled="isInputDisabled"
+            :id="spacingPosition"
+            @change="setValueInStore"
+            placeholder="0px"
+            class="input-box"
+        />
         <DropDown :options="props.dropDownOptions" @set-values="selectionChanged"></DropDown>
     </div>
 </template>
 
 <style scoped>
 .input-box {
-    width: calc(var(--width-unit)*10);
+    width: calc(var(--width-unit) * 10);
 }
 
 .m-4 {
-    margin: calc(var(--margin-unit)*4);
+    margin: calc(var(--margin-unit) * 4);
 }
 </style>
