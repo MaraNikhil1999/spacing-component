@@ -1,49 +1,75 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onBeforeMount } from 'vue';
 import DropDown from './DropDown.vue';
 import type { DropDownOption } from '../Interface/DropDown';
 import type { SpacingProperty, SpacingType } from '../Interface/StyleObj';
 import { isValidPadding } from '../utils//CSS.utils';
 import { useStyleObjStore } from '../stores/styleObjStore';
-import { allSpacingProperties } from '../utils//CSS.utils';
 
 interface Props {
-    initialMargin: string;
+    initialSpacing: string;
     showSuggestions: boolean;
     dropDownOptions: DropDownOption[];
     spacingPosition: SpacingProperty;
-    spacingType: SpacingType
+    spacingType: SpacingType,
+    isInputDisabled: boolean | undefined;
 }
 const props = defineProps<Props>();
 const styleObjStore = useStyleObjStore();
-const initialMargin = ref(props.initialMargin);
+const initialSpacing = ref(props.initialSpacing);
+
+onBeforeMount(() => {
+    styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value);
+});
 
 function selectionChanged(dropDownOption: DropDownOption) {
-    if(dropDownOption.forAll){
-        styleObjStore.setStyleObj(props.spacingType, 'ALL', initialMargin.value);
-
-    }else{
-        styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialMargin.value);
+    if (dropDownOption.value) {
+        initialSpacing.value = dropDownOption.value;
     }
-        
+    if (dropDownOption.forAll) {
+        styleObjStore.setStyleObj(props.spacingType, 'ALL', initialSpacing.value);
+
+    } else {
+        styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value);
+    }
+
 }
 
 function setValueInStore() {
-    if (isValidPadding(initialMargin.value)) {
-       styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialMargin.value);
+    if (isValidPadding(initialSpacing.value)) {
+        styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value);
     } else {
-        initialMargin.value = '';
+        initialSpacing.value = '';
     }
 }
+
+watch(() => styleObjStore,
+    (newVal) => {
+        const updatedValue = newVal.styleObj.changed[props.spacingType][props.spacingPosition]
+        if (updatedValue) {
+            initialSpacing.value = updatedValue;
+        }
+    },
+    { deep: true }
+);
 
 
 </script>
 
 <template>
-    <div>
-        <input v-model="initialMargin" type="text" id="marginTop" @change="setValueInStore" placeholder="0px" />
+    <div class="flex m-4">
+        <input type="text" v-model="initialSpacing" :disabled="isInputDisabled" :id="spacingPosition"
+            @change="setValueInStore" placeholder="0px" class="input-box" />
         <DropDown :options="props.dropDownOptions" @set-values="selectionChanged"></DropDown>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.input-box {
+    width: 40px;
+}
+
+.m-4 {
+    margin: 14px;
+}
+</style>

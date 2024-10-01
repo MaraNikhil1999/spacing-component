@@ -15,16 +15,8 @@ export const useStyleObjStore = defineStore('styleObj', () => {
         },
         "value": {
             "margin": {
-                "top": "auto",
-                "bottom": "auto",
-                "right": "auto",
-                "left": "auto"
             },
             "padding": {
-                "top": "12%",
-                "bottom": "12%",
-                "right": "12%",
-                "left": "12%"
             }
         }
     })
@@ -32,10 +24,15 @@ export const useStyleObjStore = defineStore('styleObj', () => {
         if (spacingProperty === 'ALL') {
             for (const property of allSpacingProperties) {
                 styleObj.value.changed[spacingType][property] = value;
+                styleObj.value.value[spacingType][property] = value;
             }
         } else {
             styleObj.value.changed[spacingType][spacingProperty] = value;
+            styleObj.value.value[spacingType][spacingProperty] = value;
         }
     }
-    return { styleObj,setStyleObj }
+    function setDefaultValue(spacingType: SpacingType, spacingProperty: SpacingProperty, value: string) {
+        styleObj.value.value[spacingType][spacingProperty] = value;
+    }
+    return { styleObj,setStyleObj,setDefaultValue }
 })
