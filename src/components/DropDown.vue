@@ -19,13 +19,10 @@ function setInputValueInParent(DropDownOption: any) {
         <button @click="showDropDown = !showDropDown">
             <img class="icon" src="@/icons/icons.svg" alt="Icon" />
         </button>
-        <div v-if="showDropDown">
-            <ul>
-                <li
-                    v-for="option in props.options"
-                    :key="option.key"
-                    @click="setInputValueInParent(option)"
-                >
+        <div v-if="showDropDown" class="pos-abs bg-white">
+            <ul class="list-ctnr">
+                <li v-for="option in props.options" :key="option.key" class="cursor-pointer list"
+                    @click="setInputValueInParent(option)">
                     {{ option.displayName }}
                 </li>
             </ul>
@@ -35,7 +32,21 @@ function setInputValueInParent(DropDownOption: any) {
 
 <style scoped>
 .icon {
-    width: 10px;
+    width: calc(var(--width-unit)*2);
     height: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.list-ctnr {
+    padding:  calc(var(--padding-unit)*2);
+    margin: 0;
+}
+
+.list {
+    list-style-type: none;
+    margin: 10px 0;
 }
 </style>

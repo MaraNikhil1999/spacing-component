@@ -30,14 +30,14 @@ const props = withDefaults(defineProps<Props>(), {
     inputDisabled: () => ({ margin: { left: true }, padding: {} })
 })
 
-const { styleObj } = useStyleObjStore()
+// const { styleObj } = useStyleObjStore()
 </script>
 
 <template>
     <div class="main">
         <h2>Margin Padding Adjuster</h2>
 
-        <div class="flex flex-veritcal margin-box">
+        <div class="flex flex-veritcal margin-box full-width">
             <SpacingComponent
                 :initial-spacing="initialMargin.top"
                 :show-suggestions="props.showSuggestionsForMarigin"
@@ -47,7 +47,7 @@ const { styleObj } = useStyleObjStore()
                 :is-input-disabled="inputDisabled.margin.top"
             >
             </SpacingComponent>
-            <div class="flex">
+            <div class="flex full-width">
                 <SpacingComponent
                     :initial-spacing="initialMargin.left"
                     :show-suggestions="props.showSuggestionsForMarigin"
@@ -58,7 +58,7 @@ const { styleObj } = useStyleObjStore()
                 >
                 </SpacingComponent>
 
-                <div class="padding-box">
+                <div class="padding-box full-width">
                     <SpacingComponent
                         :initial-spacing="initialPadding.top"
                         :show-suggestions="props.showSuggestionsForPadding"
@@ -79,7 +79,7 @@ const { styleObj } = useStyleObjStore()
                         >
                         </SpacingComponent>
 
-                        <div class="rectangle-box">
+                        <div class="rectangle-box bg-white">
                             <h4>BOX</h4>
                         </div>
                         <SpacingComponent
@@ -127,25 +127,21 @@ const { styleObj } = useStyleObjStore()
 
 <style scoped>
 .main {
-    margin: 20px;
+    margin: calc(var(--margin-unit) * 5);
     text-align: center;
-    position: absolute;
-    width: 80%;
-    left: 10%;
 }
 
 .margin-box {
-    border: 2px solid grey;
-    background-color: lightgrey;
+    border: 2px solid var(--bdr-grey);
+    background-color: var(--bg-grey);
 }
 
 .padding-box {
-    border: 2px solid blue;
-    background-color: lightblue;
+    border: 2px solid var(--bdr-blue);
+    background-color: var(--bg-blue);
 }
 
 .rectangle-box {
-    width: 100%;
-    background-color: white;
+    flex-grow: 1;
 }
 </style>

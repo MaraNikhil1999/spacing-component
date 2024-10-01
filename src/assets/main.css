@@ -3,6 +3,47 @@
     align-items: center;
     justify-content: center;
 }
+
 .flex-veritcal {
     flex-direction: column;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+:root {
+    --bg-grey: #ebebeb;
+    --bdr-grey: grey;
+    --bg-blue: #ccd9e7;
+    --bdr-blue: blue;
+    --margin-unit:4px;
+    --pading-unit:4px;
+    --width-unit:5px;
+    --height-unit:5px
+}
+@media (max-width: 768px) {
+    :root {
+        --margin-unit: 3px;
+        --pading-unit: 3px;
+        --width-unit: 4px;
+        --height-unit: 4px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --margin-unit: 1px;
+        --pading-unit: 1px;
+        --width-unit: 2px;
+        --height-unit: 2px;
+    }
 }
