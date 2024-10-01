@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DropDownOption } from './../Interface/DropDown';
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 interface Props {
     options: DropDownOption[];
 }
