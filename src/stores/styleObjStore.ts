@@ -12,8 +12,18 @@ export const useStyleObjStore = defineStore('styleObj', () => {
             padding: {}
         },
         value: {
-            margin: {},
-            padding: {}
+            margin: {
+                top: '',
+                bottom: '',
+                right: '',
+                left: ''
+            },
+            padding: {
+                top: '',
+                bottom: '',
+                right: '',
+                left: ''
+            }
         }
     })
     function setStyleObj(

@@ -11,8 +11,8 @@ export interface SpacingComponentData {
         padding: Partial<SpacingProperties>
     }
     value: {
-        margin: Partial<SpacingProperties>
-        padding: Partial<SpacingProperties>
+        margin: SpacingProperties
+        padding: SpacingProperties
     }
 }
 
