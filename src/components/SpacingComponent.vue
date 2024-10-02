@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
 import DropDown from './DropDown.vue'
 import type { DropDownOption } from '../Interface/DropDown'
 import type { SpacingProperty, SpacingType } from '../Interface/StyleObj'

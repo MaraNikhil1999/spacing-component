@@ -14,19 +14,20 @@ function setInputValueInParent(DropDownOption: any) {
     emit('set-values', DropDownOption)
     toggleDropDown()
 }
+
+function checkIsOutSideClick(event: MouseEvent) {
+    const target = event.target as HTMLElement
+    if (target && !mainElement.value?.contains(target)) {
+        toggleDropDown()
+    }
+}
+
 function toggleDropDown() {
     showDropDown.value = !showDropDown.value
     if (showDropDown.value) {
         document.addEventListener('click', checkIsOutSideClick)
     } else {
         document.removeEventListener('click', checkIsOutSideClick)
-    }
-}
-
-function checkIsOutSideClick(event: MouseEvent) {
-    const target = event.target as HTMLElement
-    if (target && !mainElement.value?.contains(target)) {
-        toggleDropDown()
     }
 }
 </script>
