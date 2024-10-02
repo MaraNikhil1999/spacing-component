@@ -3,8 +3,6 @@ import { defineStore } from 'pinia'
 import type { SpacingComponentData, SpacingProperty, SpacingType } from '@/Interface/StyleObj'
 import { allSpacingProperties } from '@/utils/CSS.utils'
 
-// TODO: Make this store accesiible to all components and functions for setting and getting the styleObj
-
 export const useStyleObjStore = defineStore('styleObj', () => {
     const styleObj = ref<SpacingComponentData>({
         changed: {
@@ -26,6 +24,13 @@ export const useStyleObjStore = defineStore('styleObj', () => {
             }
         }
     })
+
+    /**
+     * Set the value of the styleObj
+     * @param spacingType this tells the function if it is margin or padding
+     * @param spacingProperty this tells the function which property to change, if all is passed, all properties will be changed
+     * @param value set the property to this value
+     */
     function setStyleObj(
         spacingType: SpacingType,
         spacingProperty: SpacingProperty | 'ALL',
@@ -41,6 +46,13 @@ export const useStyleObjStore = defineStore('styleObj', () => {
             styleObj.value.value[spacingType][spacingProperty] = value
         }
     }
+
+    /**
+     * Set the default value of the styleObj
+     * @param spacingType this tells the function if it is margin or padding
+     * @param spacingProperty this tells the function which property to change
+     * @param value set the property to this value
+     */
     function setDefaultValue(
         spacingType: SpacingType,
         spacingProperty: SpacingProperty,

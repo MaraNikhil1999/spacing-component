@@ -15,14 +15,19 @@ interface Props {
 }
 const props = defineProps<Props>()
 const styleObjStore = useStyleObjStore()
-let inputValue = props.initialSpacing;
+let inputValue = props.initialSpacing
 
 styleObjStore.setDefaultValue(props.spacingType, props.spacingProperty, props.initialSpacing)
 
-
+/**
+ * this will set the value in the store,if the value is changed from the dropdown
+ * if the value is for all then it will set the value for all the sides
+ * if the value is not for all then it will set the value for the current side
+ * @param dropDownOption
+ */
 function selectionChanged(dropDownOption: DropDownOption) {
     if (dropDownOption.hasOwnProperty('value')) {
-        inputValue = dropDownOption.value || '';
+        inputValue = dropDownOption.value || ''
     }
     if (dropDownOption.forAll) {
         styleObjStore.setStyleObj(props.spacingType, 'ALL', inputValue)
@@ -31,6 +36,11 @@ function selectionChanged(dropDownOption: DropDownOption) {
     }
 }
 
+/**
+ * this will set the value in the store,if the value is changed from the input field
+ * if the value is not valid then it will set the value to empty string
+ * @param event
+ */
 function setValueInStore(event: Event) {
     const target = event.target as HTMLInputElement
     inputValue = target.value || ''
@@ -52,7 +62,11 @@ function setValueInStore(event: Event) {
             class="input no-bg-bdr"
             @change="setValueInStore"
         />
-        <DropDown :options="props.dropDownOptions" :show-suggestions="showSuggestions" @set-values="selectionChanged"></DropDown>
+        <DropDown
+            :options="props.dropDownOptions"
+            :show-suggestions="showSuggestions"
+            @set-values="selectionChanged"
+        ></DropDown>
     </span>
 </template>
 

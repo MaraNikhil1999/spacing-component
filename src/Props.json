@@ -20,7 +20,6 @@
             "value": "auto",
             "displayName": "Set all values to auto",
             "forAll": true
-
         },
         {
             "displayName": "set value to 0px",
@@ -36,12 +35,12 @@
             "forAll": true
         }
     ],
-    "showSuggestionsForMarigin": true,
+    "showSuggestionsForMargin": true,
     "showSuggestionsForPadding": false,
     "inputDisabled": {
         "margin": {
             "left": false,
-            "right":true
+            "right": true
         },
         "padding": {
             "bottom": true

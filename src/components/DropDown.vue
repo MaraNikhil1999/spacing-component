@@ -2,7 +2,7 @@
 import type { DropDownOption } from './../Interface/DropDown'
 import { ref } from 'vue'
 interface Props {
-    options: DropDownOption[],
+    options: DropDownOption[]
     showSuggestions: boolean
 }
 const props = defineProps<Props>()
@@ -10,11 +10,18 @@ const showDropDown = ref(false)
 const mainElement = ref<HTMLElement>()
 const emit = defineEmits(['set-values'])
 
+/**
+ * this will set the value in the parent component
+ * @param DropDownOption
+ */
 function setInputValueInParent(DropDownOption: any) {
     emit('set-values', DropDownOption)
     toggleDropDown()
 }
-
+/**
+ * this will check if the click is outside the dropdown or not
+ * @param event
+ */
 function checkIsOutSideClick(event: MouseEvent) {
     const target = event.target as HTMLElement
     if (target && !mainElement.value?.contains(target)) {
@@ -22,6 +29,11 @@ function checkIsOutSideClick(event: MouseEvent) {
     }
 }
 
+/**
+ * this will toggle the dropdown,
+ * and if the dropdown is open then it will add the event listener to check if the click is outside the dropdown or not.
+ * if the dropdown is closed then it will remove the event listener.
+ */
 function toggleDropDown() {
     showDropDown.value = !showDropDown.value
     if (showDropDown.value) {
@@ -34,8 +46,17 @@ function toggleDropDown() {
 
 <template>
     <div ref="mainElement">
-        <button @click="toggleDropDown" :disabled="!showSuggestions" class="no-bg-bdr cursor-pointer">
-            <img class="icon" :class="{ 'rotate': showDropDown }" src="@/icons/icons.svg" alt="Icon" />
+        <button
+            @click="toggleDropDown"
+            :disabled="!showSuggestions"
+            class="no-bg-bdr cursor-pointer"
+        >
+            <img
+                class="icon"
+                :class="{ rotate: showDropDown }"
+                src="@/icons/icons.svg"
+                alt="Icon"
+            />
         </button>
         <div v-if="showDropDown" class="pos-rel">
             <ul class="list-ctnr bg-white brdr-rad-1 box-shd pos-abs">
@@ -61,7 +82,7 @@ function toggleDropDown() {
 .cursor-pointer {
     cursor: pointer;
 }
-.rotate{
+.rotate {
     transform: rotate(180deg);
 }
 
