@@ -9,8 +9,18 @@
     },
     "suggestions": [
         {
-            "displayName": "Apply current value to all",
+            "displayName": "Set all values to this value",
             "forAll": true
+        },
+        {
+            "value": "auto",
+            "displayName": "Set value to auto"
+        },
+        {
+            "value": "auto",
+            "displayName": "Set all values to auto",
+            "forAll": true
+
         },
         {
             "displayName": "set value to 0px",
