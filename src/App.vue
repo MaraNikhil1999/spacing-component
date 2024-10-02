@@ -13,7 +13,7 @@ interface Props {
     initialMargin?: SpacingValue
     initialPadding?: SpacingValue
     suggestions?: DropDownOption[]
-    showSuggestionsForMarigin?: boolean
+    showSuggestionsForMargin?: boolean
     showSuggestionsForPadding?: boolean
     inputDisabled?: InputDisabled
 }
@@ -26,9 +26,8 @@ const props = withDefaults(defineProps<Props>(), {
         { displayName: 'set value to 0px', value: '0px' },
         { displayName: 'Remove this value', value: '' },
         { displayName: 'Remove all value', value: '', forAll: true }
-
     ],
-    showSuggestionsForMarigin: true,
+    showSuggestionsForMargin: true,
     showSuggestionsForPadding: true,
     inputDisabled: () => ({ margin: { left: true }, padding: {} })
 })
@@ -45,62 +44,96 @@ const paddingSuggestions = [...[props.initialPadding], ...props.suggestions]
         <div class="flex flex-veritcal margin-box full-width brdr-rad-2">
             <div class="flex flex-veritcal full-width pos-rel">
                 <span class="top-left p-4 text-cap"> Margin </span>
-                <SpacingComponent :initial-spacing="initialMargin.value"
-                    :show-suggestions="props.showSuggestionsForMarigin" :drop-down-options="marginSuggestions"
-                    spacingProperty="top" spacing-type="margin" :is-input-disabled="inputDisabled.margin.top">
+                <SpacingComponent
+                    :initial-spacing="initialMargin.value"
+                    :show-suggestions="props.showSuggestionsForMargin"
+                    :drop-down-options="marginSuggestions"
+                    spacingProperty="top"
+                    spacing-type="margin"
+                    :is-input-disabled="inputDisabled.margin.top"
+                >
                 </SpacingComponent>
             </div>
 
             <div class="flex full-width">
-                <SpacingComponent :initial-spacing="initialMargin.value"
-                    :show-suggestions="props.showSuggestionsForMarigin" :drop-down-options="marginSuggestions"
-                    spacingProperty="left" spacing-type="margin" :is-input-disabled="inputDisabled.margin.left">
+                <SpacingComponent
+                    :initial-spacing="initialMargin.value"
+                    :show-suggestions="props.showSuggestionsForMargin"
+                    :drop-down-options="marginSuggestions"
+                    spacingProperty="left"
+                    spacing-type="margin"
+                    :is-input-disabled="inputDisabled.margin.left"
+                >
                 </SpacingComponent>
 
                 <div class="padding-box full-width brdr-rad-2">
                     <div class="flex flex-veritcal full-width pos-rel">
                         <span class="top-left p-4 text-cap"> Padding </span>
 
-                        <SpacingComponent :initial-spacing="initialPadding.value"
-                            :show-suggestions="props.showSuggestionsForPadding" :drop-down-options="paddingSuggestions"
-                            spacingProperty="top" spacing-type="padding" :is-input-disabled="inputDisabled.padding.top">
+                        <SpacingComponent
+                            :initial-spacing="initialPadding.value"
+                            :show-suggestions="props.showSuggestionsForPadding"
+                            :drop-down-options="paddingSuggestions"
+                            spacingProperty="top"
+                            spacing-type="padding"
+                            :is-input-disabled="inputDisabled.padding.top"
+                        >
                         </SpacingComponent>
                     </div>
 
                     <div class="flex">
-                        <SpacingComponent :initial-spacing="initialPadding.value"
-                            :show-suggestions="props.showSuggestionsForPadding" :drop-down-options="paddingSuggestions"
-                            spacingProperty="left" spacing-type="padding"
-                            :is-input-disabled="inputDisabled.padding.left">
+                        <SpacingComponent
+                            :initial-spacing="initialPadding.value"
+                            :show-suggestions="props.showSuggestionsForPadding"
+                            :drop-down-options="paddingSuggestions"
+                            spacingProperty="left"
+                            spacing-type="padding"
+                            :is-input-disabled="inputDisabled.padding.left"
+                        >
                         </SpacingComponent>
 
                         <div class="rectangle-box bg-white brdr-rad-2"></div>
-                        <SpacingComponent :initial-spacing="initialPadding.value"
-                            :show-suggestions="props.showSuggestionsForPadding" :drop-down-options="paddingSuggestions"
-                            spacingProperty="right" spacing-type="padding"
-                            :is-input-disabled="inputDisabled.padding.right">
+                        <SpacingComponent
+                            :initial-spacing="initialPadding.value"
+                            :show-suggestions="props.showSuggestionsForPadding"
+                            :drop-down-options="paddingSuggestions"
+                            spacingProperty="right"
+                            spacing-type="padding"
+                            :is-input-disabled="inputDisabled.padding.right"
+                        >
                         </SpacingComponent>
                     </div>
-                    <SpacingComponent :initial-spacing="initialPadding.value"
-                        :show-suggestions="props.showSuggestionsForPadding" :drop-down-options="paddingSuggestions"
-                        spacingProperty="bottom" spacing-type="padding"
-                        :is-input-disabled="inputDisabled.padding.bottom">
+                    <SpacingComponent
+                        :initial-spacing="initialPadding.value"
+                        :show-suggestions="props.showSuggestionsForPadding"
+                        :drop-down-options="paddingSuggestions"
+                        spacingProperty="bottom"
+                        spacing-type="padding"
+                        :is-input-disabled="inputDisabled.padding.bottom"
+                    >
                     </SpacingComponent>
                 </div>
-                <SpacingComponent :initial-spacing="initialMargin.value"
-                    :show-suggestions="props.showSuggestionsForMarigin" :drop-down-options="marginSuggestions"
-                    spacingProperty="right" spacing-type="margin" :is-input-disabled="inputDisabled.margin.right">
+                <SpacingComponent
+                    :initial-spacing="initialMargin.value"
+                    :show-suggestions="props.showSuggestionsForMargin"
+                    :drop-down-options="marginSuggestions"
+                    spacingProperty="right"
+                    spacing-type="margin"
+                    :is-input-disabled="inputDisabled.margin.right"
+                >
                 </SpacingComponent>
             </div>
-            <SpacingComponent :initial-spacing="initialMargin.value" :show-suggestions="props.showSuggestionsForMarigin"
-                :drop-down-options="marginSuggestions" spacingProperty="bottom" spacing-type="margin"
-                :is-input-disabled="inputDisabled.margin.bottom">
+            <SpacingComponent
+                :initial-spacing="initialMargin.value"
+                :show-suggestions="props.showSuggestionsForMargin"
+                :drop-down-options="marginSuggestions"
+                spacingProperty="bottom"
+                spacing-type="margin"
+                :is-input-disabled="inputDisabled.margin.bottom"
+            >
             </SpacingComponent>
         </div>
     </div>
-    <pre>
-        {{ styleObj }}
-    </pre>
 </template>
 
 <style scoped>
