@@ -83,3 +83,6 @@ body{
 .text-cap {
     text-transform: uppercase;
 }
+[disabled] {
+    cursor: not-allowed !important;
+}

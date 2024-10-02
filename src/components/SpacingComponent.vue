@@ -16,15 +16,14 @@ interface Props {
 }
 const props = defineProps<Props>()
 const styleObjStore = useStyleObjStore()
-let inputValue = ''
+let inputValue = props.initialSpacing;
 
-onBeforeMount(() => {
-    styleObjStore.setDefaultValue(props.spacingType, props.spacingProperty, props.initialSpacing)
-})
+styleObjStore.setDefaultValue(props.spacingType, props.spacingProperty, props.initialSpacing)
+
 
 function selectionChanged(dropDownOption: DropDownOption) {
-    if (dropDownOption.value) {
-        inputValue = dropDownOption.value
+    if (dropDownOption.hasOwnProperty('value')) {
+        inputValue = dropDownOption.value || '';
     }
     if (dropDownOption.forAll) {
         styleObjStore.setStyleObj(props.spacingType, 'ALL', inputValue)
@@ -54,7 +53,7 @@ function setValueInStore(event: Event) {
             class="input no-bg-bdr"
             @change="setValueInStore"
         />
-        <DropDown :options="props.dropDownOptions" @set-values="selectionChanged"></DropDown>
+        <DropDown :options="props.dropDownOptions" :show-suggestions="showSuggestions" @set-values="selectionChanged"></DropDown>
     </span>
 </template>
 
@@ -67,6 +66,7 @@ function setValueInStore(event: Event) {
     width: calc(var(--width-unit) * 7);
     height: 100%;
     margin: 0;
+    font-weight: inherit;
 }
 
 .m-4 {

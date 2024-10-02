@@ -2,7 +2,8 @@
 import type { DropDownOption } from './../Interface/DropDown'
 import { ref } from 'vue'
 interface Props {
-    options: DropDownOption[]
+    options: DropDownOption[],
+    showSuggestions: boolean
 }
 const props = defineProps<Props>()
 const showDropDown = ref(false)
@@ -32,7 +33,7 @@ function checkIsOutSideClick(event: MouseEvent) {
 
 <template>
     <div ref="mainElement">
-        <button @click="toggleDropDown" class="no-bg-bdr cursor-pointer">
+        <button @click="toggleDropDown" :disabled="!showSuggestions" class="no-bg-bdr cursor-pointer">
             <img class="icon" :class="{ 'rotate': showDropDown }" src="@/icons/icons.svg" alt="Icon" />
         </button>
         <div v-if="showDropDown" class="pos-rel">
