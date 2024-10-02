@@ -29,6 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
 
     ],
     showSuggestionsForMarigin: true,
+    showSuggestionsForPadding: true,
     inputDisabled: () => ({ margin: { left: true }, padding: {} })
 })
 
@@ -39,7 +40,7 @@ const paddingSuggestions = [...[props.initialPadding], ...props.suggestions]
 
 <template>
     <div class="main">
-        <h2>Margin Padding Adjuster</h2>
+        <h2>Margin And Padding Adjuster</h2>
 
         <div class="flex flex-veritcal margin-box full-width brdr-rad-2">
             <div class="flex flex-veritcal full-width pos-rel">

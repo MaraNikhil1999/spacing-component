@@ -1,0 +1,40 @@
+{
+    "initialMargin": {
+        "value": "auto",
+        "displayName": "Set to auto"
+    },
+    "initialPadding": {
+        "value": "20px",
+        "displayName": "Set to 20px"
+    },
+    "suggestions": [
+        {
+            "displayName": "Apply current value to all",
+            "forAll": true
+        },
+        {
+            "displayName": "set value to 0px",
+            "value": "0px"
+        },
+        {
+            "displayName": "Remove current value",
+            "value": ""
+        },
+        {
+            "displayName": "Remove all value",
+            "value": "",
+            "forAll": true
+        }
+    ],
+    "showSuggestionsForMarigin": true,
+    "showSuggestionsForPadding": false,
+    "inputDisabled": {
+        "margin": {
+            "left": false,
+            "right":true
+        },
+        "padding": {
+            "bottom": true
+        }
+    }
+}
