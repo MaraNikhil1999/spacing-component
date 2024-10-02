@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onBeforeMount } from 'vue'
+import { onBeforeMount } from 'vue'
 import DropDown from './DropDown.vue'
 import type { DropDownOption } from '../Interface/DropDown'
 import type { SpacingProperty, SpacingType } from '../Interface/StyleObj'
@@ -10,67 +10,63 @@ interface Props {
     initialSpacing: string
     showSuggestions: boolean
     dropDownOptions: DropDownOption[]
-    spacingPosition: SpacingProperty
+    spacingProperty: SpacingProperty
     spacingType: SpacingType
     isInputDisabled: boolean | undefined
 }
 const props = defineProps<Props>()
 const styleObjStore = useStyleObjStore()
-const initialSpacing = ref(props.initialSpacing)
+let inputValue = ''
 
 onBeforeMount(() => {
-    styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value)
+    styleObjStore.setDefaultValue(props.spacingType, props.spacingProperty, props.initialSpacing)
 })
 
 function selectionChanged(dropDownOption: DropDownOption) {
     if (dropDownOption.value) {
-        initialSpacing.value = dropDownOption.value
+        inputValue = dropDownOption.value
     }
     if (dropDownOption.forAll) {
-        styleObjStore.setStyleObj(props.spacingType, 'ALL', initialSpacing.value)
+        styleObjStore.setStyleObj(props.spacingType, 'ALL', inputValue)
     } else {
-        styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value)
+        styleObjStore.setStyleObj(props.spacingType, props.spacingProperty, inputValue)
     }
 }
 
-function setValueInStore() {
-    if (isValidPadding(initialSpacing.value)) {
-        styleObjStore.setStyleObj(props.spacingType, props.spacingPosition, initialSpacing.value)
-    } else {
-        initialSpacing.value = ''
+function setValueInStore(event: Event) {
+    const target = event.target as HTMLInputElement
+    inputValue = target.value || ''
+    if (!isValidPadding(inputValue)) {
+        inputValue = ''
     }
+    styleObjStore.setStyleObj(props.spacingType, props.spacingProperty, inputValue)
 }
-
-watch(
-    () => styleObjStore,
-    (newVal) => {
-        const updatedValue = newVal.styleObj.changed[props.spacingType][props.spacingPosition]
-        if (updatedValue) {
-            initialSpacing.value = updatedValue
-        }
-    },
-    { deep: true }
-)
 </script>
 
 <template>
-    <div class="flex m-4">
+    <span class="flex m-4 inpt-cntr">
         <input
             type="text"
-            v-model="initialSpacing"
+            v-model="styleObjStore.styleObj.value[spacingType][spacingProperty]"
             :disabled="isInputDisabled"
-            :id="spacingPosition"
-            @change="setValueInStore"
+            :id="spacingProperty"
             placeholder="0px"
-            class="input-box"
+            class="input no-bg-bdr"
+            @change="setValueInStore"
         />
         <DropDown :options="props.dropDownOptions" @set-values="selectionChanged"></DropDown>
-    </div>
+    </span>
 </template>
 
 <style scoped>
-.input-box {
-    width: calc(var(--width-unit) * 10);
+.inpt-cntr {
+    height: calc(var(--height-unit) * 4);
+}
+
+.input {
+    width: calc(var(--width-unit) * 7);
+    height: 100%;
+    margin: 0;
 }
 
 .m-4 {
