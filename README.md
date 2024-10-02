@@ -3,6 +3,7 @@
 - this project demonstaate the component which can be used to add spacing between the elements
 - the spacing can be added in the form of margin or padding
 - the spacing can be added in the form of top, bottom, left, right or all
+- for passing the props to the component, add the props in the form of JSON in th file [Props.json](./src/Props.json)
 
 ## Project Setup
 
@@ -20,12 +21,6 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
