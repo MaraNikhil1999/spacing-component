@@ -1,9 +1,9 @@
-# Spacing component
+# Spacing Component
 
-- this project demonstaate the component which can be used to add spacing between the elements
-- the spacing can be added in the form of margin or padding
-- the spacing can be added in the form of top, bottom, left, right or all
-- for passing the props to the component, add the props in the form of JSON in th file [Props.json](./src/Props.json)
+- This project demonstrates the component which can be used to add spacing between the elements.
+- The spacing can be added in the form of margin or padding.
+- The spacing can be added in the form of top, bottom, left, right, or all.
+- For passing the props to the component, add the props in the form of JSON in the file [Props.md](./src/Props.md).
 
 ## Project Setup
 
