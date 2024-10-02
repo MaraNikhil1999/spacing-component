@@ -1,7 +1,8 @@
 import type { SpacingProperty } from '../Interface/StyleObj'
 
 export const isValidPadding = (input: string) => {
-    const paddingRegex = /^(\d+(px|em|rem|%)\s*){1,4}$/
+    const paddingRegex =
+        /^(\d+(px|em|rem|%|vh)\s*)|(auto|inherit|initial|revert|revert-layey|unset)$/
     return paddingRegex.test(input)
 }
 
