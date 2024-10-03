@@ -36,14 +36,14 @@
         }
     ],
     "showSuggestionsForMargin": true,
-    "showSuggestionsForPadding": false,
+    "showSuggestionsForPadding": true,
     "inputDisabled": {
         "margin": {
             "left": false,
-            "right": true
+            "right": false
         },
         "padding": {
-            "bottom": true
+            "bottom": false
         }
     }
 }
