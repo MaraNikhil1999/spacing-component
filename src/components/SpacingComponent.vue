@@ -2,7 +2,7 @@
 import DropDown from './DropDown.vue'
 import type { DropDownOption } from '../Interface/DropDown'
 import type { SpacingProperty, SpacingType } from '../Interface/StyleObj'
-import { isValidPadding } from '../utils//CSS.utils'
+import { isValidInputValue } from '../utils//CSS.utils'
 import { useStyleObjStore } from '../stores/styleObjStore'
 
 interface Props {
@@ -44,7 +44,7 @@ function selectionChanged(dropDownOption: DropDownOption) {
 function setValueInStore(event: Event) {
     const target = event.target as HTMLInputElement
     inputValue = target.value || ''
-    if (!isValidPadding(inputValue)) {
+    if (!isValidInputValue(inputValue)) {
         inputValue = ''
     }
     styleObjStore.setStyleObj(props.spacingType, props.spacingProperty, inputValue)

@@ -14,7 +14,7 @@ const emit = defineEmits(['set-values'])
  * this will set the value in the parent component
  * @param DropDownOption
  */
-function setInputValueInParent(DropDownOption: any) {
+function setInputValueInParent(DropDownOption: DropDownOption) {
     emit('set-values', DropDownOption)
     toggleDropDown()
 }
