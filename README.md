@@ -4,6 +4,7 @@
 - The spacing can be added in the form of margin or padding.
 - The spacing can be added in the form of top, bottom, left, right, or all.
 - For passing the props to the component, add the props in the form of JSON in the file [Props.md](./src/Props.md).
+- Here is the video link of the demo [Link](https://share.vidyard.com/watch/xR8oi3hrbH5kogj5VLsJcZ?)
 
 ## Project Setup
 
