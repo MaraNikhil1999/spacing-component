@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watch } from 'vue';
 import SpacingComponent from './components/SpacingComponent.vue'
 import type { DropDownOption } from './Interface/DropDown'
 import type { InputDisabled } from './Interface/StyleObj'
@@ -33,6 +34,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { styleObj } = useStyleObjStore()
+watch(styleObj,()=>{
+    // Logging when styleObj got changed
+    console.log('Updated value',styleObj)
+},{deep:true})
 const marginSuggestions = [...[props.initialMargin], ...props.suggestions]
 const paddingSuggestions = [...[props.initialPadding], ...props.suggestions]
 </script>
